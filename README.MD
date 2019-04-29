@@ -36,3 +36,8 @@ Optional features (time permitting):
 ## Development/Build Setup
 
 * .NET Core SDK (Windows, Linux, MacOS) is the only required tooling: <https://dotnet.microsoft.com/download>
+
+## Dev log notes
+
+* For loading/parsing of the source data, this could be done a number of ways (including writing my own parser). However, the requirements here are fairly basic and the source data fairly clean. I decided to use the CsvHelper nuget package to perform this task. CsvHelper allows me to project the records into strongly-typed .NET objects.
+* One complication discovered while testing is that when allowing the enumeration of records parsed by CsvHelper to be deferred, if the underlying stream has been disposed then the enumeration would throw. If this were high-throughput then I might let this get more complicated, but for this situation, I decided to simply force the enumeration before exiting the `using` block.
