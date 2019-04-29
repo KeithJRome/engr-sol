@@ -48,14 +48,19 @@ namespace TruckFinder.Data
         public bool MatchesAnyKeywords(string[] keywords)
         {
             var applicant = Applicant ?? string.Empty;
+            var address = Address ?? string.Empty;
             var fooditems = FoodItems ?? string.Empty;
             foreach (var keyword in keywords)
             {
-                if (applicant.Contains(keyword))
+                if (applicant.Contains(keyword, StringComparison.InvariantCultureIgnoreCase))
                 {
                     return true;
                 }
-                if (fooditems.Contains(keyword))
+                if (address.Contains(keyword, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return true;
+                }
+                if (fooditems.Contains(keyword, StringComparison.InvariantCultureIgnoreCase))
                 {
                     return true;
                 }
