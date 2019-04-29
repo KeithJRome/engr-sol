@@ -20,6 +20,11 @@ namespace TruckFinder.Data
         [Name("Status")]
         public string Status { get; set; }
 
+        [Name("PriorPermit")]
+        [BooleanTrueValues("1")]
+        [BooleanFalseValues("0")]
+        public bool PriorPermit { get; set; }
+
         [Name("FoodItems")]
         public string FoodItems { get; set; }
 
@@ -39,5 +44,23 @@ namespace TruckFinder.Data
         [Name("ExpirationDate")]
         [Optional]
         public DateTime? ExpirationDate { get; set; }
+
+        public bool MatchesAnyKeywords(string[] keywords)
+        {
+            var applicant = Applicant ?? string.Empty;
+            var fooditems = FoodItems ?? string.Empty;
+            foreach (var keyword in keywords)
+            {
+                if (applicant.Contains(keyword))
+                {
+                    return true;
+                }
+                if (fooditems.Contains(keyword))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

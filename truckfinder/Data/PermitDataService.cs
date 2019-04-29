@@ -13,7 +13,7 @@ namespace TruckFinder.Data
 
         public async Task<IEnumerable<MobileFoodPermit>> GetMobileFoodPermitsAsync(string url)
         {
-            using (var stream = await _client.GetStreamAsync(url))
+            using (var stream = await _client.GetStreamAsync(url).ConfigureAwait(false))
             {
                 using (var reader = new StreamReader(stream))
                 {
