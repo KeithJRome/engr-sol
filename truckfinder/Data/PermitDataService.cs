@@ -7,7 +7,7 @@ using CsvHelper;
 
 namespace TruckFinder.Data
 {
-    public class PermitDataService
+    public class PermitDataService : IPermitDataService
     {
         private readonly HttpClient _client = new HttpClient();
 

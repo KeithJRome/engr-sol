@@ -41,3 +41,9 @@ Optional features (time permitting):
 
 * For loading/parsing of the source data, this could be done a number of ways (including writing my own parser). However, the requirements here are fairly basic and the source data fairly clean. I decided to use the CsvHelper nuget package to perform this task. CsvHelper allows me to project the records into strongly-typed .NET objects.
 * One complication discovered while testing is that when allowing the enumeration of records parsed by CsvHelper to be deferred, if the underlying stream has been disposed then the enumeration would throw. If this were high-throughput then I might let this get more complicated, but for this situation, I decided to simply force the enumeration before exiting the `using` block.
+* To compute distances, rather than rely on a geolocation API (or batch API), I'm using a well-known formula to compute them quickly. It's not perfectly accurate, but should be "good enough" for relatively short distances such as these.
+* Some permits do not include valid lat/lng data and so cannot be included in distance calculations. One way around this would be to perform address lookups using the Bing/Google APIs in order to resolve possibly usable coordinates.
+* GeoLocation data is not available in .NET Core console apps, so there isn't a good way to find the user's current location. This is a downside due to the choice of application type (a mobile or web application would not have this limitation). I picked an arbitrary street corner in San Francisco as the default values to ease testing.
+* Added some filtering features that weren't part of the original requirements (vendor type and keyword filters).
+* Performed some refactoring to unclutter the main program class and provide a more clear seperation of concerns between code classes.
+* Moved services behind interfaces to enable easier composition and testing.
