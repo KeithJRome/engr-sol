@@ -47,3 +47,4 @@ Optional features (time permitting):
 * Added some filtering features that weren't part of the original requirements (vendor type and keyword filters).
 * Performed some refactoring to unclutter the main program class and provide a more clear seperation of concerns between code classes.
 * Moved services behind interfaces to enable easier composition and testing.
+* Created CI Build pipeline in personal devops account.
